@@ -1,0 +1,13 @@
+version: "3"
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: syakusyaku-frontend
+    container_name: syakusyaku-frontend
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
+    command: npm start
