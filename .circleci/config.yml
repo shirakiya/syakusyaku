@@ -1,0 +1,42 @@
+npm:
+  restore_cache: &npm_restore_cache
+    keys:
+      - npm-v1-{{ .Branch }}-{{ checksum "package.json" }}
+      - npm-v1-{{ .Branch }}-
+      - npm-v1-
+
+  install: &npm_install
+    name: Install npm modules
+    command: npm install
+
+  save_cache: &npm_save_cache
+    key: npm-v1-{{ .Branch }}-{{ checksum "package.json" }}
+    paths:
+      - ./node_modules
+
+version: 2.1
+executors:
+  nodejs:
+    docker:
+      - image: circleci/node:10.15
+    working_directory: ~/syakusyaku
+jobs:
+  lint:
+    executor: nodejs
+    steps:
+      - checkout
+      - restore_cache:
+          <<: *npm_restore_cache
+      - run:
+          <<: *npm_install
+      - save_cache:
+          <<: *npm_save_cache
+      - run:
+          name: Check Lint
+          command: npm run lint
+
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - lint
