@@ -7,10 +7,13 @@ phases:
       - npm install
   build:
     commands:
-      - echo "Build webpack..."
+      - echo "Build webpack bundle..."
       - npm run build:prd
-
-artifacts:
-  files:
-    - dist/*
-    - static
+  post_build:
+    commands:
+      - echo "Put new bundle files..."
+      - apt update -y
+      - apt install -y python3-pip
+      - pip3 install awscli
+      - aws s3 sync ./dist s3://syakusyaku-public/
+      - aws s3 sync ./static s3://syakusyaku-public/static
