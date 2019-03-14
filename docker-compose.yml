@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     image: syakusyaku-frontend
     container_name: syakusyaku-frontend
+    environment:
+      - GOOGLE_API_KEY
     volumes:
       - .:/app
     ports:

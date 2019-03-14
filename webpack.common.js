@@ -1,6 +1,6 @@
 const path = require('path')
+const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const Dotenv = require('dotenv-webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const distPath = path.resolve(__dirname, 'dist')
@@ -14,11 +14,11 @@ module.exports = {
     path: distPath,
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.GOOGLE_API_KEY': JSON.stringify(process.env.GOOGLE_API_KEY),
+    }),
     new CleanWebpackPlugin([distPath]),
     new VueLoaderPlugin(),
-    new Dotenv({
-      path: './.env',
-    }),
   ],
   module: {
     rules: [
