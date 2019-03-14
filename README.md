@@ -2,14 +2,22 @@
   <img width="200" height="200" src="https://raw.githubusercontent.com/shirakiya/syakusyaku/master/static/logo.png">
 </p>
 
-# syakusyaku (尺々)
-You can see the distance on Google Maps with Syakusyaku.  
 [![CircleCI](https://circleci.com/gh/shirakiya/syakusyaku.svg?style=svg)](https://circleci.com/gh/shirakiya/syakusyaku)
+
+# syakusyaku (尺々)
+You can see the distance on Google Maps with Syakusyaku.
 
 
 ## Requirements
 - Node.js >= 10.15
 - Docker / docker-compose
+
+
+## Environment Variables
+| Key            | default       |
+|----------------|---------------|
+| GOOGLE_API_KEY | ''            |
+
 
 
 ## SetUp
