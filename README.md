@@ -38,5 +38,5 @@ $ docker-compose up
 
 
 ## Deploy
+Deploy with AWS CodePipeline.  
 It hooks the deploy workflow to merge new commits into `production` branch.
-
