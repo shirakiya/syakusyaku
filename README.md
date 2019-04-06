@@ -14,9 +14,10 @@ You can see the distance on Google Maps with Syakusyaku.
 
 
 ## Environment Variables
-| Key            | default       |
-|----------------|---------------|
-| GOOGLE_API_KEY | ''            |
+| Key            | default       | description                   |
+|----------------|---------------|-------------------------------|
+| GOOGLE_API_KEY | ''            | for Google Maps               |
+| GITHUB_TOKEN   | ''            | for Terraform GitHub provider |
 
 
 
