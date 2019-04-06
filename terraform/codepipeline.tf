@@ -7,7 +7,7 @@ resource "aws_codebuild_project" "main" {
   environment {
     compute_type    = "BUILD_GENERAL1_SMALL"
     type            = "LINUX_CONTAINER"
-    image           = "node:10.15.3-alpine"
+    image           = "aws/codebuild/nodejs:10.14.1"
     privileged_mode = false
 
     environment_variable {

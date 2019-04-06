@@ -1,3 +1,7 @@
+data "aws_kms_alias" "syakusyaku_key" {
+  name = "alias/syakusyaku_key"
+}
+
 resource "aws_iam_role" "codepipeline_service_role" {
   name = "syakusyaku-codepipeline-service-role"
 
@@ -96,6 +100,24 @@ resource "aws_iam_role_policy" "codedeploy_service_role" {
         "${aws_s3_bucket.public.arn}/*",
         "${aws_s3_bucket.infra.arn}",
         "${aws_s3_bucket.infra.arn}/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameters"
+      ],
+      "Resource": [
+        "arn:aws:ssm:${var.region}:${data.aws_caller_identity.self.account_id}:parameter/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kms:Decrypt"
+      ],
+      "Resource": [
+        "${data.aws_kms_alias.syakusyaku_key.arn}"
       ]
     }
   ]
