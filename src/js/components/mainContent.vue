@@ -17,6 +17,7 @@
             />
           </div>
           <div id="map" />
+          <ad />
         </v-flex>
         <v-flex md4 xs12>
           <v-card>
@@ -185,6 +186,7 @@
 
 <script>
 import scriptjs from 'scriptjs'
+import Ad from './ad.vue'
 import ErrorNotification from './errorNotification.vue'
 import Introduction from './introduction.vue'
 import { getGeocoderResultFromAddress } from '../utils/googleGeocodingApi.js'
@@ -192,6 +194,7 @@ import { getColorAliasByNum, getColorCodeByNum } from '../utils/materialColor.js
 
 export default {
   components: {
+    Ad,
     ErrorNotification,
     Introduction,
   },
