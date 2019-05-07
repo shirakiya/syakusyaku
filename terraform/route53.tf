@@ -1,7 +1,8 @@
 resource "aws_acm_certificate" "cert" {
-  provider          = "aws.us_east_1"
-  domain_name       = "syakusyaku.shirakiya.com"
-  validation_method = "DNS"
+  provider                  = "aws.us_east_1"
+  domain_name               = "syakusyaku.shirakiya.com"
+  subject_alternative_names = ["*.syakusyaku.shirakiya.com"]
+  validation_method         = "DNS"
 
   lifecycle {
     create_before_destroy = true
