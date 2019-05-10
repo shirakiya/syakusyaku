@@ -189,7 +189,7 @@ import scriptjs from 'scriptjs'
 import Ad from './ad.vue'
 import ErrorNotification from './errorNotification.vue'
 import Introduction from './introduction.vue'
-import { getGeocoderResultFromAddress } from '../utils/googleGeocodingApi.js'
+import { getGeocoderResultFromAddresses } from '../utils/api.js'
 import { getColorAliasByNum, getColorCodeByNum } from '../utils/materialColor.js'
 
 export default {
@@ -323,7 +323,7 @@ export default {
       }, 1400)
     },
     calcDistance() {
-      getGeocoderResultFromAddress([this.searchAddress1, this.searchAddress2])
+      getGeocoderResultFromAddresses([this.searchAddress1, this.searchAddress2])
         .then(geocoderResults => {
           if (this.marker1) this.removeMapObject(this.marker1)
           if (this.marker2) this.removeMapObject(this.marker2)
@@ -331,11 +331,11 @@ export default {
 
           const fromGeocoder = geocoderResults[0]
           this.calcedSearchAddress1 = fromGeocoder.formatted_address
-          const fromLatLng = new google.maps.LatLng(fromGeocoder.geometry.location.lat, fromGeocoder.geometry.location.lng)
+          const fromLatLng = new google.maps.LatLng(fromGeocoder.lat, fromGeocoder.lng)
 
           const toGeocoder = geocoderResults[1]
           this.calcedSearchAddress2 = toGeocoder.formatted_address
-          const toLatLng = new google.maps.LatLng(toGeocoder.geometry.location.lat, toGeocoder.geometry.location.lng)
+          const toLatLng = new google.maps.LatLng(toGeocoder.lat, toGeocoder.lng)
 
           this.calcedDistance = google.maps.geometry.spherical.computeDistanceBetween(fromLatLng, toLatLng)
 
@@ -355,8 +355,6 @@ export default {
             strokeWeight: 2,
           })
           this.zoomCenter(fromLatLng)
-
-          this.$refs.directDistanceForm.reset()
         })
         .catch(err => {
           this.hasError = true

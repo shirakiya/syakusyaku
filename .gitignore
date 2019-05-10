@@ -65,3 +65,4 @@ typings/
 dist
 .terraform
 terraform/terraform.tfvars
+output-template.yaml
