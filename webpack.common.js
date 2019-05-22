@@ -42,8 +42,14 @@ module.exports = {
             [
               '@babel/preset-env',
               {
+                targets: {
+                  browsers: [
+                    'last 2 versions',
+                    'Chrome >= 41',
+                  ],
+                },
                 modules: false,
-                useBuiltIns: 'usage'
+                useBuiltIns: 'usage',
               },
             ],
           ],
