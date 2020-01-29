@@ -9,7 +9,7 @@ You can see the distance on Google Maps with Syakusyaku.
 
 
 ## Requirements
-- Node.js >= 10.15
+- Node.js >= 12
 - Docker / docker-compose
 - awscli
 

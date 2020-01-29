@@ -18,7 +18,7 @@ version: 2.1
 executors:
   nodejs:
     docker:
-      - image: circleci/node:10.15
+      - image: circleci/node:12.14.1
     working_directory: ~/syakusyaku
 jobs:
   lint:
