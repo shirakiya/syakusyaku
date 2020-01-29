@@ -35,7 +35,12 @@ $ docker-compose build
 This project uses Webpack. In dev, run application with webpack-dev-server.
 
 ```
+# frontend server
 $ docker-compose up
+
+# api server
+$ cd api/
+$ make start-api
 ```
 
 
