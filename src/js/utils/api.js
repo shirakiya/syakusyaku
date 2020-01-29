@@ -1,4 +1,3 @@
-/* global process */
 import axios from 'axios'
 
 const API_URL_ENV = process.env.API_URL

@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const distPath = path.resolve(__dirname, 'dist')
@@ -17,7 +17,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.GOOGLE_API_KEY': JSON.stringify(process.env.GOOGLE_API_KEY),
     }),
-    new CleanWebpackPlugin([distPath]),
+    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
   ],
   module: {
@@ -51,6 +51,7 @@ module.exports = {
                 },
                 modules: false,
                 useBuiltIns: 'usage',
+                corejs: 2,
               },
             ],
           ],
