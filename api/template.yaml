@@ -7,7 +7,7 @@ Globals:
     Name: syakusyaku
     Cors:
       AllowOrigin: "'https://syakusyaku.shirakiya.com'"
-      MaxAge: 86500
+      MaxAge: "'86500'"
   Function:
     Timeout: 5
     Tags:
