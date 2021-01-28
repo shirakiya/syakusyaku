@@ -1,14 +1,21 @@
-const merge = require('webpack-merge')
+const { mergeWithRules } = require('webpack-merge')
 const common = require('./webpack.common.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
-module.exports = merge.smart(common, {
+module.exports = mergeWithRules({
+  module: {
+    rules: {
+      test: 'match',
+      use: 'replace',
+    },
+  },
+})(common, {
   mode: 'production',
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name]-[hash].css',
+      filename: '[name]-[fullhash].css',
     }),
     new HtmlWebpackPlugin({
       template: 'index.tmpl.html',
@@ -18,11 +25,9 @@ module.exports = merge.smart(common, {
   optimization: {
     minimizer: [
       new TerserPlugin({
-        sourceMap: true,
         parallel: true,
       }),
     ],
-    noEmitOnErrors: true,
     splitChunks: {
       chunks: 'all',
     },
@@ -33,7 +38,7 @@ module.exports = merge.smart(common, {
         test: /\.styl(us)?$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader?url=false',
+          'css-loader',
           'stylus-loader',
         ],
       }
