@@ -41,9 +41,13 @@ module.exports = {
             [
               '@babel/preset-env',
               {
+                targets: [
+                  'last 2 version',
+                  'not dead',
+                ],
                 modules: false,
                 useBuiltIns: 'usage',
-                corejs: 2,
+                corejs: 3,
               },
             ],
           ],
@@ -53,7 +57,7 @@ module.exports = {
         test: /\.styl(us)?$/,
         use: [
           'style-loader',
-          'css-loader?url=false',
+          'css-loader',
           'stylus-loader',
         ],
       },
