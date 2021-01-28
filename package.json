@@ -34,7 +34,7 @@
     "axios": "0.21.1",
     "scriptjs": "2.5.9",
     "vue": "2.6.12",
-    "vuetify": "1.5.22"
+    "vuetify": "1.5.24"
   },
   "browserslist": [
     "last 2 versions",
