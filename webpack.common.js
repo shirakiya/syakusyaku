@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const distPath = path.resolve(__dirname, 'dist')
 
@@ -19,15 +20,12 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
+    new ESLintPlugin({
+      extensions: ['js', 'vue'],
+    }),
   ],
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
       {
         test: /\.vue$/,
         exclude: /node_modules/,
@@ -39,7 +37,7 @@ module.exports = {
         include: '/node_modules/vuetify',
         loader: 'babel-loader',
         options: {
-          'presets': [
+          presets: [
             [
               '@babel/preset-env',
               {
@@ -58,12 +56,12 @@ module.exports = {
           'css-loader?url=false',
           'stylus-loader',
         ],
-      }
+      },
     ],
   },
   resolve: {
     alias: {
-      'vue': 'vue/dist/vue.min.js',
+      vue: 'vue/dist/vue.min.js',
     },
   },
 }
