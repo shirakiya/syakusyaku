@@ -365,18 +365,18 @@ export default {
 }
 </script>
 
-<style lang='stylus' scoped>
+<style lang='sass' scoped>
 #map-container
-  padding-right 20px
-  margin-bottom 10px
+  padding-right: 20px
+  margin-bottom: 10px
 
 #map
-  width 100%
-  height 500px
+  width: 100%
+  height: 500px
 
 .app-description
-  margin-bottom 15px
+  margin-bottom: 15px
 
 .direct-distance-result-container
-  padding-top 20px
+  padding-top: 20px
 </style>

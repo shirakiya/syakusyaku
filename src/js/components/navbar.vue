@@ -22,10 +22,10 @@
 export default {}
 </script>
 
-<style lang='stylus' scoped>
+<style lang='sass' scoped>
 .nav-title
-  color white
+  color: white
 
 .logo
-  width 40px
+  width: 40px
 </style>

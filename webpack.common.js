@@ -54,11 +54,26 @@ module.exports = {
         },
       },
       {
-        test: /\.styl(us)?$/,
+        test: /\.css$/,
         use: [
-          'style-loader',
+          'vue-style-loader',
           'css-loader',
-          'stylus-loader',
+        ],
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                indentedSyntax: true,
+              },
+            },
+          },
         ],
       },
     ],
