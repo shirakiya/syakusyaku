@@ -15,7 +15,7 @@
     "clean-webpack-plugin": "3.0.0",
     "css-loader": "5.0.1",
     "deepmerge": "4.2.2",
-    "eslint": "7.18.0",
+    "eslint": "7.19.0",
     "eslint-plugin-vue": "7.5.0",
     "eslint-webpack-plugin": "2.4.3",
     "html-webpack-plugin": "4.5.1",
