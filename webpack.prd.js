@@ -35,11 +35,26 @@ module.exports = mergeWithRules({
   module: {
     rules: [
       {
-        test: /\.styl(us)?$/,
+        test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'stylus-loader',
+        ],
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                indentedSyntax: true,
+              },
+            },
+          },
         ],
       }
     ],

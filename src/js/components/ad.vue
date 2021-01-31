@@ -17,7 +17,7 @@
 export default {}
 </script>
 
-<style lang='stylus' scoped>
+<style lang='sass' scoped>
 .ad
-  margin-top 15px
+  margin-top: 15px
 </style>

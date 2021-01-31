@@ -16,7 +16,9 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.GOOGLE_API_KEY': JSON.stringify(process.env.GOOGLE_API_KEY),
+      'process.env': {
+        GOOGLE_API_KEY: JSON.stringify(process.env.GOOGLE_API_KEY),
+      },
     }),
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
@@ -54,11 +56,26 @@ module.exports = {
         },
       },
       {
-        test: /\.styl(us)?$/,
+        test: /\.css$/,
         use: [
           'style-loader',
           'css-loader',
-          'stylus-loader',
+        ],
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                indentedSyntax: true,
+              },
+            },
+          },
         ],
       },
     ],

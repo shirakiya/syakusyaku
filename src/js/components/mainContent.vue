@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <error-notification
       :error="hasError"
     />
@@ -36,7 +36,7 @@
                         <v-snackbar
                           right
                           top
-                          :timeout="0"
+                          :timeout="-1"
                           :value="isPointSelectedPhase"
                         >
                           マップ上で中心地点を選択してください
@@ -181,7 +181,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script>
@@ -365,18 +365,18 @@ export default {
 }
 </script>
 
-<style lang='stylus' scoped>
+<style lang='sass' scoped>
 #map-container
-  padding-right 20px
-  margin-bottom 10px
+  padding-right: 20px
+  margin-bottom: 10px
 
 #map
-  width 100%
-  height 500px
+  width: 100%
+  height: 500px
 
 .app-description
-  margin-bottom 15px
+  margin-bottom: 15px
 
 .direct-distance-result-container
-  padding-top 20px
+  padding-top: 20px
 </style>
