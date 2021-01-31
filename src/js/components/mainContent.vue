@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <error-notification
       :error="hasError"
     />
@@ -36,7 +36,7 @@
                         <v-snackbar
                           right
                           top
-                          :timeout="0"
+                          :timeout="-1"
                           :value="isPointSelectedPhase"
                         >
                           マップ上で中心地点を選択してください
@@ -181,7 +181,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script>
