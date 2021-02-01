@@ -8,7 +8,7 @@ const distPath = path.resolve(__dirname, 'dist')
 
 module.exports = {
   entry: {
-    main: './src/js/main.js',
+    main: './src/main.js',
   },
   output: {
     filename: '[name]-[hash].js',
