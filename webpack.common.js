@@ -16,9 +16,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        GOOGLE_API_KEY: JSON.stringify(process.env.GOOGLE_API_KEY),
-      },
+      GOOGLE_API_KEY: JSON.stringify(process.env.GOOGLE_API_KEY),
     }),
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),

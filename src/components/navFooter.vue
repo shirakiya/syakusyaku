@@ -12,7 +12,15 @@
     >
       <v-card>
         <v-card-title class="headline primary white--text">
-          利用規約
+          <span>利用規約</span>
+          <v-spacer />
+          <v-btn
+            icon
+            color="white"
+            @click="closeTerms"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -46,6 +54,9 @@ export default {
   methods: {
     openTerms() {
       this.isOpen = true
+    },
+    closeTerms() {
+      this.isOpen = false
     },
   },
 }

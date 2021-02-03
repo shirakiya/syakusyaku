@@ -1,5 +1,7 @@
 <template>
-  <v-app-bar class color="white" absolute dark app>
+  <v-app-bar class color="white" fixed dark app>
+    <!-- dummy for spacing -->
+    <v-btn text disabled />
     <v-spacer />
     <v-app-bar-nav-icon>
       <a href="/">
@@ -24,7 +26,15 @@
     >
       <v-card>
         <v-card-title class="headline primary white--text">
-          使い方
+          <span>使い方</span>
+          <v-spacer />
+          <v-btn
+            icon
+            color="white"
+            @click="closeHowToUse"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -50,6 +60,9 @@ export default {
   methods: {
     openHowToUse() {
       this.isOpen = true
+    },
+    closeHowToUse() {
+      this.isOpen = false
     },
   },
 }
