@@ -5,7 +5,8 @@
 [![CircleCI](https://circleci.com/gh/shirakiya/syakusyaku.svg?style=svg)](https://circleci.com/gh/shirakiya/syakusyaku)
 
 # syakusyaku (尺々)
-You can see the distance on Google Maps with Syakusyaku.
+You can see the distance on Google Maps with Syakusyaku.  
+https://syakusyaku.shirakiya.com/
 
 
 ## Requirements
