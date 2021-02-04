@@ -8,15 +8,15 @@
 
 <script>
 import { VApp } from 'vuetify/lib'
-import MainContent from './components/mainContent.vue'
 import Navbar from './components/navbar.vue'
+import MainContent from './components/mainContent.vue'
 import NavFooter from './components/navFooter.vue'
 
 export default {
   components: {
-    NavFooter,
     MainContent,
     Navbar,
+    NavFooter,
     VApp,
   },
 }

@@ -17,7 +17,6 @@ You can see the distance on Google Maps with Syakusyaku.
 ## Environment Variables
 | Key            | default       | description                                                 |
 |----------------|---------------|-------------------------------------------------------------|
-| API_URL        | ''            | Project API URL (overwrited, trailing slash is not needed)  |
 | GOOGLE_API_KEY | ''            | for Google Maps                                             |
 | GITHUB_TOKEN   | ''            | for Terraform GitHub provider (for deploy)                  |
 

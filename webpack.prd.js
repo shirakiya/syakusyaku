@@ -19,7 +19,7 @@ module.exports = mergeWithRules({
     }),
     new HtmlWebpackPlugin({
       template: 'index.tmpl.html',
-      title: '尺々',
+      title: '尺々 ~地図に好きな直径の円を置く~',
     }),
   ],
   optimization: {
