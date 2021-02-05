@@ -1,4 +1,0 @@
-domain_name = "<your domain name>"
-github_token = "<generate GitHub access token>"
-region = "ap-northeast-1"
-codepipeline_webhook_secret = "<generate a secret by yourself>"

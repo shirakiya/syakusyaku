@@ -1,25 +1,21 @@
-terraform {
-  required_version = ">= 0.11.0"
+locals {
+  project_id     = "syakusyaku"
+  project_number = "125838661316"
+  region         = "asia-northeast1"
+}
 
-  backend "s3" {
-    bucket = "syakusyaku-terraform"
-    region = "ap-northeast-1"
-    key    = "terraform.tfstate"
+provider "google" {
+  project = local.project_id
+  region  = local.region
+}
+
+terraform {
+  # See README.md
+  backend "gcs" {
+    bucket  = "syakusyaku-terraform-backend"
+    prefix  = ""
+    version = ">= v3.55"
   }
 }
 
-provider "aws" {
-  region = "${var.region}"
-}
-
-provider "aws" {
-  region = "us-east-1"
-  alias  = "us_east_1"
-}
-
-provider "github" {
-  token        = "${var.github_token}"
-  organization = "${var.github_organization}"
-}
-
-data "aws_caller_identity" "self" {}
+# And, enable cloudresourcemanager.googleapis.com to use terraform gcp provider.

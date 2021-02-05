@@ -65,4 +65,5 @@ typings/
 dist
 .terraform
 terraform/terraform.tfvars
-output-template.yaml
+terraform/service_account_key.json
+api/output-template.yaml
