@@ -15,6 +15,8 @@ npm:
       - ./node_modules
 
 version: 2.1
+orbs:
+  terraform: circleci/terraform@1.2.0
 executors:
   nodejs:
     docker:
@@ -40,3 +42,10 @@ workflows:
   test:
     jobs:
       - lint
+      - terraform/fmt:
+          checkout: true
+          path: terraform/
+      - terraform/validate:
+          checkout: true
+          backend: false
+          path: terraform/
