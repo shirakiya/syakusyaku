@@ -12,14 +12,12 @@ https://syakusyaku.shirakiya.com/
 ## Requirements
 - Node.js >= 12
 - Docker / docker-compose
-- awscli
 
 
 ## Environment Variables
 | Key            | default       | description                                                 |
 |----------------|---------------|-------------------------------------------------------------|
 | GOOGLE_API_KEY | ''            | for Google Maps                                             |
-| GITHUB_TOKEN   | ''            | for Terraform GitHub provider (for deploy)                  |
 
 
 
@@ -37,27 +35,10 @@ This project uses Webpack. In dev, run application with webpack-dev-server.
 ```
 # frontend server
 $ docker-compose up
-
-# api server
-$ cd api/
-$ make start-api
 ```
 
 
 ## Deploy
+Deploy from CircleCI to Firebase Hosting.  
+It hooks the workflow to push git tags named 'v...'.
 
-- Frontend
-
-Deploy with AWS CodePipeline.  
-It hooks the deploy workflow to merge new commits into `production` branch.
-
-- API
-
-Deploy with [serverless-application-model](https://github.com/awslabs/serverless-application-model) (SAM).  
-When update API, commands as follows.
-
-```
-$ cd api/
-$ make package
-$ make deploy
-```

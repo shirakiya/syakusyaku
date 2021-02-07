@@ -65,4 +65,3 @@ typings/
 .firebase
 public/*
 !public/static
-api/output-template.yaml
