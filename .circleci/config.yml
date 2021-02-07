@@ -37,10 +37,6 @@ jobs:
 
   build:
     executor: nodejs
-    parameters:
-      env-short:
-        type: string
-        default: dev
     steps:
       - checkout
       - restore_cache:
@@ -51,7 +47,7 @@ jobs:
           <<: *npm_save_cache
       - run:
           name: Build webpack
-          command: npm run build:<< parameters.env-short >>
+          command: npm run build:prd
       - persist_to_workspace:
           root: public
           paths:
@@ -72,26 +68,17 @@ jobs:
 
 workflows:
   version: 2
-  test:
-    jobs:
-      - lint:
-          filters:
-            tags:
-              ignore: /^v.*/
-      - build:
-          env-short: dev
-          requires:
-            - lint
   test-and-deploy:
     jobs:
-      - lint:
-          filters:
-            tags:
-              only: /^v.*/
+      - lint
       - build:
-          env-short: prd
           requires:
             - lint
       - deploy-firebase:
           requires:
             - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
