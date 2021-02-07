@@ -52,10 +52,16 @@ workflows:
   version: 2
   test-and-deploy:
     jobs:
-      - lint
+      - lint:
+          filters:
+            tags:
+              only: /^v.*/
       - build:
           requires:
             - lint
+          filters:
+            tags:
+              only: /^v.*/
       - deploy-firebase:
           requires:
             - build
