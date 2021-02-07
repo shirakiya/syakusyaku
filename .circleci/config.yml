@@ -15,8 +15,6 @@ npm:
       - ./node_modules
 
 version: 2.1
-orbs:
-  terraform: circleci/terraform@1.2.0
 executors:
   nodejs:
     docker:
@@ -37,15 +35,63 @@ jobs:
           name: Check Lint
           command: npm run lint
 
+  build:
+    executor: nodejs
+    parameters:
+      env-short:
+        type: string
+        default: dev
+    steps:
+      - checkout
+      - restore_cache:
+          <<: *npm_restore_cache
+      - run:
+          <<: *npm_install
+      - save_cache:
+          <<: *npm_save_cache
+      - run:
+          name: Build webpack
+          command: npm run build:<< parameters.env-short >>
+      - persist_to_workspace:
+          root: public
+          paths:
+            - *
+
+  deploy-firebase:
+    executor: nodejs
+    steps:
+      - checkout
+      - attach_workspace:
+          at: public
+      - run:
+          name: Install firebase-cli
+          command: npm install -g firebase-tools
+      - run:
+          name: Deploy to Firebase Hosting
+          command: firebase deploy --only hosting --project $CIRCLE_PROJECT_REPONAME --token $FIREBASE_TOKEN --message $CIRCLE_TAG
+
 workflows:
   version: 2
   test:
     jobs:
-      - lint
-      - terraform/fmt:
-          checkout: true
-          path: terraform/
-      - terraform/validate:
-          checkout: true
-          backend: false
-          path: terraform/
+      - lint:
+          filters:
+            tags:
+              ignore: /^v.*/
+      - build:
+          env-short: dev
+          requires:
+            - lint
+  test-and-deploy:
+    jobs:
+      - lint:
+          filters:
+            tags:
+              only: /^v.*/
+      - build:
+          env-short: prd
+          requires:
+            - lint
+      - deploy-firebase:
+          requires:
+            - build
