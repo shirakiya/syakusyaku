@@ -18,8 +18,9 @@ module.exports = mergeWithRules({
       filename: '[name]-[fullhash].css',
     }),
     new HtmlWebpackPlugin({
-      template: 'index.tmpl.html',
+      template: 'src/index.tmpl.html',
       title: '尺々 ~地図に好きな直径の円を置く~',
+      minify: false,
     }),
   ],
   optimization: {

@@ -13,7 +13,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'index.tmpl.html',
+      template: 'src/index.tmpl.html',
       title: '(dev)尺々',
     }),
   ],
