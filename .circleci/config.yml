@@ -28,6 +28,8 @@ jobs:
       - run:
           name: Build webpack
           command: npm run build:prd
+      - store_artifacts:
+          path: public
       - persist_to_workspace:
           root: public
           paths:
