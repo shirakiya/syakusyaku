@@ -64,7 +64,4 @@ typings/
 # Project's ignore
 dist
 .firebase
-.terraform
-terraform/terraform.tfvars
-terraform/service_account_key.json
 api/output-template.yaml
