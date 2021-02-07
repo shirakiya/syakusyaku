@@ -64,4 +64,3 @@ typings/
 # Project's ignore
 .firebase
 public/*
-!public/static

@@ -15,6 +15,7 @@ module.exports = merge(common, {
     new HtmlWebpackPlugin({
       template: 'src/index.tmpl.html',
       title: '(dev)尺々',
+      favicon: 'src/assets/favicon.ico',
     }),
   ],
 })

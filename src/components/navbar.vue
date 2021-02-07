@@ -6,10 +6,10 @@
     <v-app-bar-nav-icon>
       <a href="/">
         <v-img
-          src="/static/logo.png"
           alt="brand logo"
           max-height="40"
           max-width="40"
+          :src="logoImg"
         />
       </a>
     </v-app-bar-nav-icon>
@@ -51,9 +51,12 @@
 </template>
 
 <script>
+import logoImg from '../assets/logo.png'
+
 export default {
   data() {
     return {
+      logoImg: logoImg,
       isOpen: false,
     }
   },

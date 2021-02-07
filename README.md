@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" height="200" src="https://raw.githubusercontent.com/shirakiya/syakusyaku/master/static/logo.png">
+  <img width="200" height="200" src="https://raw.githubusercontent.com/shirakiya/syakusyaku/master/src/assets/logo.png">
 </p>
 
 [![CircleCI](https://circleci.com/gh/shirakiya/syakusyaku.svg?style=svg)](https://circleci.com/gh/shirakiya/syakusyaku)

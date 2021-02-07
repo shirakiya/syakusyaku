@@ -13,6 +13,7 @@ module.exports = {
   output: {
     filename: '[name]-[hash].js',
     path: distPath,
+    assetModuleFilename: 'images/[hash][ext][query]'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -20,11 +21,6 @@ module.exports = {
     }),
     new CleanWebpackPlugin({
       verbose: true,
-      cleanOnceBeforeBuildPatterns: [
-        '**/*',
-        '!static',
-        '!static/*',
-      ],
     }),
     new VueLoaderPlugin(),
     new ESLintPlugin({
@@ -59,6 +55,10 @@ module.exports = {
             ],
           ],
         },
+      },
+      {
+        test: /\.(ico|svg|jpe?g|png|webp)$/,
+        type: 'asset/resource',
       },
       {
         test: /\.css$/,
