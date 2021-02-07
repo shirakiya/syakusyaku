@@ -8,8 +8,6 @@ COPY package*.json ./
 RUN npm install
 
 COPY .eslintrc.json .
-COPY index.tmpl.html .
-COPY static ./static
 COPY webpack.*.js ./
 COPY src ./src
 

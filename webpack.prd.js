@@ -20,6 +20,7 @@ module.exports = mergeWithRules({
     new HtmlWebpackPlugin({
       template: 'src/index.tmpl.html',
       title: '尺々 ~地図に好きな直径の円を置く~',
+      favicon: 'src/assets/favicon.ico',
       minify: false,
     }),
   ],
