@@ -1,20 +1,6 @@
-npm:
-  restore_cache: &npm_restore_cache
-    keys:
-      - npm-v1-{{ .Branch }}-{{ checksum "package.json" }}
-      - npm-v1-{{ .Branch }}-
-      - npm-v1-
-
-  install: &npm_install
-    name: Install npm modules
-    command: npm install
-
-  save_cache: &npm_save_cache
-    key: npm-v1-{{ .Branch }}-{{ checksum "package.json" }}
-    paths:
-      - ./node_modules
-
 version: 2.1
+orbs:
+  node: circleci/node@4.1.0
 executors:
   nodejs:
     docker:
@@ -25,12 +11,9 @@ jobs:
     executor: nodejs
     steps:
       - checkout
-      - restore_cache:
-          <<: *npm_restore_cache
-      - run:
-          <<: *npm_install
-      - save_cache:
-          <<: *npm_save_cache
+      - node/install-packages:
+          cache-version: v1
+          pkg-manager: npm
       - run:
           name: Check Lint
           command: npm run lint
@@ -39,12 +22,9 @@ jobs:
     executor: nodejs
     steps:
       - checkout
-      - restore_cache:
-          <<: *npm_restore_cache
-      - run:
-          <<: *npm_install
-      - save_cache:
-          <<: *npm_save_cache
+      - node/install-packages:
+          cache-version: v1
+          pkg-manager: npm
       - run:
           name: Build webpack
           command: npm run build:prd
