@@ -1,22 +1,6 @@
-npm:
-  restore_cache: &npm_restore_cache
-    keys:
-      - npm-v1-{{ .Branch }}-{{ checksum "package.json" }}
-      - npm-v1-{{ .Branch }}-
-      - npm-v1-
-
-  install: &npm_install
-    name: Install npm modules
-    command: npm install
-
-  save_cache: &npm_save_cache
-    key: npm-v1-{{ .Branch }}-{{ checksum "package.json" }}
-    paths:
-      - ./node_modules
-
 version: 2.1
 orbs:
-  terraform: circleci/terraform@1.2.0
+  node: circleci/node@4.1.0
 executors:
   nodejs:
     docker:
@@ -27,25 +11,54 @@ jobs:
     executor: nodejs
     steps:
       - checkout
-      - restore_cache:
-          <<: *npm_restore_cache
-      - run:
-          <<: *npm_install
-      - save_cache:
-          <<: *npm_save_cache
+      - node/install-packages:
+          cache-version: v1
+          pkg-manager: npm
       - run:
           name: Check Lint
           command: npm run lint
 
+  build:
+    executor: nodejs
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-version: v1
+          pkg-manager: npm
+      - run:
+          name: Build webpack
+          command: npm run build:prd
+      - persist_to_workspace:
+          root: public
+          paths:
+            - "*"
+
+  deploy-firebase:
+    executor: nodejs
+    steps:
+      - checkout
+      - attach_workspace:
+          at: public
+      - run:
+          name: Install firebase-cli
+          command: sudo npm install -g firebase-tools
+      - run:
+          name: Deploy to Firebase Hosting
+          command: firebase deploy --only hosting --project $CIRCLE_PROJECT_REPONAME --token $FIREBASE_TOKEN --message $CIRCLE_TAG
+
 workflows:
   version: 2
-  test:
+  test-and-deploy:
     jobs:
       - lint
-      - terraform/fmt:
-          checkout: true
-          path: terraform/
-      - terraform/validate:
-          checkout: true
-          backend: false
-          path: terraform/
+      - build:
+          requires:
+            - lint
+      - deploy-firebase:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
