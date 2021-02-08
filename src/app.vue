@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <navbar />
+    <navbar :initial-open="isFirstVisit" />
     <main-content />
     <nav-footer />
   </v-app>
@@ -18,6 +18,11 @@ export default {
     Navbar,
     NavFooter,
     VApp,
+  },
+  computed: {
+    isFirstVisit() {
+      return !localStorage.getItem('visited')
+    },
   },
 }
 </script>
