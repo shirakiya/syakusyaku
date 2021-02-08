@@ -37,10 +37,16 @@ export default {
   components: {
     howToUseCard,
   },
+  props: {
+    initialOpen: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       logoImg: logoImg,
-      isOpen: false,
+      isOpen: this.initialOpen,
     }
   },
   methods: {

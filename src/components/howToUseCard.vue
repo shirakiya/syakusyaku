@@ -132,6 +132,9 @@ export default {
       howToUseImg3: howToUseImg3,
     }
   },
+  mounted() {
+    localStorage.setItem('visited', true)
+  },
   methods: {
     closeDialog() {
       this.$emit('close')
