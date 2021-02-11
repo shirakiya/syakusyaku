@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const distPath = path.resolve(__dirname, 'public')
 
@@ -25,6 +26,11 @@ module.exports = {
     new VueLoaderPlugin(),
     new ESLintPlugin({
       extensions: ['js', 'vue'],
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/robots.txt', to: 'robots.txt' },
+      ],
     }),
   ],
   module: {
