@@ -16,7 +16,7 @@
     "copy-webpack-plugin": "7.0.0",
     "css-loader": "5.0.2",
     "deepmerge": "4.2.2",
-    "eslint": "7.19.0",
+    "eslint": "7.20.0",
     "eslint-plugin-vue": "7.5.0",
     "eslint-webpack-plugin": "2.5.1",
     "html-webpack-plugin": "5.1.0",
