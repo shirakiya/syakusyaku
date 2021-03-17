@@ -35,6 +35,6 @@
     "@babel/polyfill": "7.12.1",
     "scriptjs": "2.5.9",
     "vue": "2.6.12",
-    "vuetify": "2.4.6"
+    "vuetify": "2.4.7"
   }
 }
