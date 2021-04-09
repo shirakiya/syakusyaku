@@ -4,7 +4,7 @@ orbs:
 executors:
   nodejs:
     docker:
-      - image: circleci/node:14.16.0
+      - image: circleci/node:14.16.1
     working_directory: ~/syakusyaku
 jobs:
   lint:
