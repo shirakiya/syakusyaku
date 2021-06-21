@@ -12,7 +12,7 @@ module.exports = {
     main: './src/main.js',
   },
   output: {
-    filename: '[name]-[hash].js',
+    filename: '[name]-[contenthash].js',
     path: distPath,
     assetModuleFilename: 'images/[name][ext][query]'
   },
