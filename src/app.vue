@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     isFirstVisit() {
-      return !localStorage.getItem('visited')
+      return this.$store.getters.isFirstVisit
     },
   },
 }
