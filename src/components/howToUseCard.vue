@@ -133,7 +133,7 @@ export default {
     }
   },
   mounted() {
-    localStorage.setItem('visited', true)
+    this.$store.dispatch('visited')
   },
   methods: {
     closeDialog() {

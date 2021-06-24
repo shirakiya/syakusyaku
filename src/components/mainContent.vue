@@ -1,3 +1,4 @@
+/* eslint-disable vue/singleline-html-element-content-newline */
 <template>
   <v-main>
     <v-container id="container" fluid>
@@ -36,13 +37,13 @@
                   </v-form>
                 </v-list-subheader>
 
-                <v-divider v-if="points.length" />
+                <v-divider v-if="isPointPresent" />
 
                 <template v-for="point in points">
                   <v-list-item-content
                     :key="point.n"
                     class="point-item-container"
-                    @mouseenter="makeMarkerBounced(point.marker)"
+                    @mouseenter="makeMarkerBounced(mapObjects[point.n].marker)"
                   >
                     <v-container>
                       <v-row no-gutters>
@@ -54,11 +55,11 @@
                         <v-col cols="9">
                           <v-form @submit.prevent>
                             <v-text-field
-                              v-model="point.circle.radius"
+                              v-model="mapObjects[point.n].circle.radius"
                               label="半径 (m)"
                               append-icon="mdi-chevron-right"
                               :rules="radiusRule"
-                              @keyup.enter="changeRadius(point.circle)"
+                              @keyup.enter="changeRadius(mapObjects[point.n].circle)"
                             />
                             <v-col class="point-item-action-row" align="end">
                               <v-btn
@@ -66,9 +67,7 @@
                                 small
                                 @click="changeRadius(point.circle)"
                               >
-                                <v-icon>
-                                  mdi-reload
-                                </v-icon>
+                                <v-icon> mdi-reload </v-icon>
                               </v-btn>
                               <v-btn
                                 outlined
@@ -76,9 +75,7 @@
                                 color="error"
                                 @click="removePoint(point)"
                               >
-                                <v-icon>
-                                  mdi-trash-can
-                                </v-icon>
+                                <v-icon> mdi-trash-can </v-icon>
                               </v-btn>
                             </v-col>
                           </v-form>
@@ -94,11 +91,7 @@
         </v-col>
         <v-col cols="12" md="10">
           <div v-if="!map" class="text-center">
-            <v-progress-circular
-              :size="100"
-              color="primary"
-              indeterminate
-            />
+            <v-progress-circular :size="100" color="primary" indeterminate />
           </div>
           <div id="map" />
         </v-col>
@@ -108,8 +101,12 @@
 </template>
 
 <script>
+/* global GOOGLE_API_KEY, google */
 import scriptjs from 'scriptjs'
-import { getColorAliasByNum, getColorCodeByNum } from '../utils/materialColor.js'
+import {
+  getColorAliasByNum,
+  getColorCodeByNum,
+} from '../utils/materialColor.js'
 
 export default {
   props: {
@@ -129,29 +126,35 @@ export default {
   data() {
     return {
       map: null,
-      // circle distance
-      isPointSelectedPhase: false,
       mapPointedListener: null,
-      points: [],
-      pointsLength: 0,
-      radiusRule: [
-        v => (!!v && !!Number(v)) || '数値を入力してください',
-      ],
+      mapObjects: {},
     }
   },
   computed: {
+    radiusRule: () => [v => (!!v && !!Number(v)) || '数値を入力してください'],
+
+    isPointSelectedPhase() {
+      return this.$store.state.isPointSelectedPhase
+    },
+
+    points() {
+      return this.$store.state.points
+    },
+    isPointPresent() {
+      return this.points.length > 0
+    },
   },
   beforeMount() {
-    /* global GOOGLE_API_KEY */
     scriptjs(
-      'https://maps.googleapis.com/maps/api/js?key=' + GOOGLE_API_KEY + '&libraries=geometry',
-      'loadGoogleMaps',
+      'https://maps.googleapis.com/maps/api/js?key=' +
+        GOOGLE_API_KEY +
+        '&libraries=geometry',
+      'loadGoogleMaps'
     )
     scriptjs.ready('loadGoogleMaps', this.loadMap)
   },
   methods: {
     loadMap() {
-      /* global google */
       this.map = new google.maps.Map(document.getElementById('map'), {
         zoom: this.zoom,
         center: {
@@ -160,26 +163,29 @@ export default {
         },
       })
     },
-    zoomCenter(latLng) {
-      this.map.setCenter(latLng)
-    },
     removeMapObject(obj) {
       obj.setMap(null)
     },
     listenPointSelected() {
-      this.isPointSelectedPhase = true
+      this.$store.dispatch('movePointSelectionPhase')
 
-      this.mapPointedListener = new google.maps.event.addListenerOnce(this.map, 'click', e => {
-        this.addPointFromLatLng(e.latLng)
-      })
+      this.mapPointedListener = new google.maps.event.addListenerOnce(
+        this.map,
+        'click',
+        e => {
+          this.addPointFromLatLng(e.latLng)
+        }
+      )
     },
     closePointSelected() {
-      this.isPointSelectedPhase = false
+      this.$store.dispatch('releasePointSelectionPhase')
 
       google.maps.event.removeListener(this.mapPointedListener)
       this.mapPointedListener = null
     },
     addPointFromLatLng(latLng) {
+      const pointCount = this.$store.state.pointCount
+
       const marker = new google.maps.Marker({
         map: this.map,
         position: latLng,
@@ -189,23 +195,20 @@ export default {
         map: this.map,
         center: marker.getPosition(),
         radius: 3000,
-        fillColor: getColorCodeByNum(this.pointsLength),
+        fillColor: getColorCodeByNum(pointCount),
         fillOpacity: 0.35,
-        strokeColor: getColorCodeByNum(this.pointsLength),
+        strokeColor: getColorCodeByNum(pointCount),
         strokeOpacity: 0.6,
         strokeWeight: 1,
       })
       circle.bindTo('center', marker, 'position')
 
-      const point = {
-        n: this.pointsLength,
-        marker: marker,
-        circle: circle,
+      this.mapObjects[pointCount] = {
+        marker,
+        circle,
       }
-      this.points.push(point)
-      this.pointsLength++
-
-      this.isPointSelectedPhase = false
+      this.$store.dispatch('addPoint')
+      this.$store.dispatch('releasePointSelectionPhase')
     },
     getColorAlias(num) {
       return getColorAliasByNum(num)
@@ -217,12 +220,12 @@ export default {
       }
     },
     removePoint(point) {
-      const targetIndex = this.points.indexOf(point)
-      if (targetIndex < 0) return
+      const mapObject = this.mapObjects[point.n]
 
-      this.removeMapObject(point.marker)
-      this.removeMapObject(point.circle)
-      this.points.splice(targetIndex, 1)
+      this.removeMapObject(mapObject.marker)
+      this.removeMapObject(mapObject.circle)
+
+      this.$store.dispatch('removePoint', point)
     },
     makeMarkerBounced(marker) {
       marker.setAnimation(google.maps.Animation.BOUNCE)
@@ -237,7 +240,7 @@ export default {
 <style lang='sass' scoped>
 // This height is a naive value.
 // The header height and the footer height vary by window width.
-$container-height: calc(100vh - 64px - 48px)  // 100vh - header - footer
+$container-height: calc(100vh - 64px - 48px) // 100vh - header - footer
 
 #container
   padding: 0
