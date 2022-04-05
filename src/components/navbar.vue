@@ -1,7 +1,16 @@
 <template>
-  <v-app-bar class color="white" fixed dark app>
+  <v-app-bar
+    class
+    color="white"
+    fixed
+    dark
+    app
+  >
     <!-- dummy for spacing -->
-    <v-btn text disabled />
+    <v-btn
+      text
+      disabled
+    />
     <v-spacer />
     <v-app-bar-nav-icon>
       <a href="/">
@@ -17,7 +26,11 @@
       <span class="indigo--text font-weight-bold">尺々</span>
     </v-app-bar-title>
     <v-spacer />
-    <v-btn text color="primary" @click="openHowToUse">
+    <v-btn
+      text
+      color="primary"
+      @click="openHowToUse"
+    >
       使い方
     </v-btn>
     <v-dialog

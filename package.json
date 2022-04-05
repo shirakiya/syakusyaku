@@ -6,6 +6,8 @@
     "build:dev": "webpack --config webpack.dev.js",
     "build:prd": "webpack --config webpack.prd.js",
     "lint": "eslint --ext .js,.vue src/",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -17,10 +19,12 @@
     "css-loader": "6.7.1",
     "deepmerge": "4.2.2",
     "eslint": "8.12.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "7.20.0",
     "eslint-webpack-plugin": "3.1.1",
     "html-webpack-plugin": "5.5.0",
     "mini-css-extract-plugin": "2.6.0",
+    "prettier": "^2.6.2",
     "sass": "1.49.11",
     "sass-loader": "12.6.0",
     "style-loader": "3.3.1",

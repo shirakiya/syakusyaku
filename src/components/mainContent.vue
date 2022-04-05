@@ -1,14 +1,23 @@
 /* eslint-disable vue/singleline-html-element-content-newline */
 <template>
   <v-main>
-    <v-container id="container" fluid>
+    <v-container
+      id="container"
+      fluid
+    >
       <v-row no-gutters>
-        <v-col cols="12" md="2">
+        <v-col
+          cols="12"
+          md="2"
+        >
           <div class="left-pane">
             <v-container>
               <v-list>
                 <v-list-subheader>
-                  <v-form class="left-pane-form" @submit.prevent>
+                  <v-form
+                    class="left-pane-form"
+                    @submit.prevent
+                  >
                     <v-snackbar
                       right
                       top
@@ -20,9 +29,7 @@
                         icon
                         @click="closePointSelected"
                       >
-                        <v-icon>
-                          mdi-close
-                        </v-icon>
+                        <v-icon> mdi-close </v-icon>
                       </v-btn>
                     </v-snackbar>
                     <v-btn
@@ -30,9 +37,7 @@
                       :disabled="isPointSelectedPhase"
                       @click="listenPointSelected"
                     >
-                      <v-icon left>
-                        mdi-plus
-                      </v-icon>中心地点を追加する
+                      <v-icon left> mdi-plus </v-icon>中心地点を追加する
                     </v-btn>
                   </v-form>
                 </v-list-subheader>
@@ -48,7 +53,10 @@
                     <v-container>
                       <v-row no-gutters>
                         <v-col cols="3">
-                          <v-icon large :color="getColorAlias(point.n)">
+                          <v-icon
+                            large
+                            :color="getColorAlias(point.n)"
+                          >
                             mdi-map-marker
                           </v-icon>
                         </v-col>
@@ -59,9 +67,14 @@
                               label="半径 (m)"
                               append-icon="mdi-chevron-right"
                               :rules="radiusRule"
-                              @keyup.enter="changeRadius(mapObjects[point.n].circle)"
+                              @keyup.enter="
+                                changeRadius(mapObjects[point.n].circle)
+                              "
                             />
-                            <v-col class="point-item-action-row" align="end">
+                            <v-col
+                              class="point-item-action-row"
+                              align="end"
+                            >
                               <v-btn
                                 outlined
                                 small
@@ -89,9 +102,19 @@
             </v-container>
           </div>
         </v-col>
-        <v-col cols="12" md="10">
-          <div v-if="!map" class="text-center">
-            <v-progress-circular :size="100" color="primary" indeterminate />
+        <v-col
+          cols="12"
+          md="10"
+        >
+          <div
+            v-if="!map"
+            class="text-center"
+          >
+            <v-progress-circular
+              :size="100"
+              color="primary"
+              indeterminate
+            />
           </div>
           <div id="map" />
         </v-col>
@@ -131,7 +154,7 @@ export default {
     }
   },
   computed: {
-    radiusRule: () => [v => (!!v && !!Number(v)) || '数値を入力してください'],
+    radiusRule: () => [(v) => (!!v && !!Number(v)) || '数値を入力してください'],
 
     isPointSelectedPhase() {
       return this.$store.state.isPointSelectedPhase
@@ -149,7 +172,7 @@ export default {
       'https://maps.googleapis.com/maps/api/js?key=' +
         GOOGLE_API_KEY +
         '&libraries=geometry',
-      'loadGoogleMaps'
+      'loadGoogleMaps',
     )
     scriptjs.ready('loadGoogleMaps', this.loadMap)
   },
@@ -172,9 +195,9 @@ export default {
       this.mapPointedListener = new google.maps.event.addListenerOnce(
         this.map,
         'click',
-        e => {
+        (e) => {
           this.addPointFromLatLng(e.latLng)
-        }
+        },
       )
     },
     closePointSelected() {
@@ -237,7 +260,10 @@ export default {
 }
 </script>
 
-<style lang='sass' scoped>
+<style
+  lang="sass"
+  scoped
+>
 // This height is a naive value.
 // The header height and the footer height vary by window width.
 $container-height: calc(100vh - 64px - 48px) // 100vh - header - footer

@@ -14,7 +14,7 @@ module.exports = {
   output: {
     filename: '[name]-[contenthash].js',
     path: distPath,
-    assetModuleFilename: 'images/[name][ext][query]'
+    assetModuleFilename: 'images/[name][ext][query]',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -28,9 +28,7 @@ module.exports = {
       extensions: ['js', 'vue'],
     }),
     new CopyPlugin({
-      patterns: [
-        { from: 'src/robots.txt', to: 'robots.txt' },
-      ],
+      patterns: [{ from: 'src/robots.txt', to: 'robots.txt' }],
     }),
   ],
   module: {
@@ -50,10 +48,7 @@ module.exports = {
             [
               '@babel/preset-env',
               {
-                targets: [
-                  'last 2 version',
-                  'not dead',
-                ],
+                targets: ['last 2 version', 'not dead'],
                 modules: false,
                 useBuiltIns: 'usage',
                 corejs: 3,
@@ -68,10 +63,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.s(a|c)ss$/,
