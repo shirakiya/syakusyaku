@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <navbar :initial-open="isFirstVisit" />
+    <nav-header :initial-open="isFirstVisit" />
     <main-content />
     <nav-footer />
   </v-app>
@@ -8,14 +8,14 @@
 
 <script>
 import { VApp } from 'vuetify/lib'
-import Navbar from './components/navbar.vue'
+import NavHeader from './components/navHeader.vue'
 import MainContent from './components/mainContent.vue'
 import NavFooter from './components/navFooter.vue'
 
 export default {
   components: {
     MainContent,
-    Navbar,
+    NavHeader,
     NavFooter,
     VApp,
   },
