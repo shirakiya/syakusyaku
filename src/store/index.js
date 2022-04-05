@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export const store =  new Vuex.Store({
+export const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
     isPointSelectedPhase: false,
@@ -17,7 +17,8 @@ export const store =  new Vuex.Store({
     visited: () => localStorage.setItem('visited', true),
 
     movePointSelectionPhase: ({ commit }) => commit('movePointSelectionPhase'),
-    releasePointSelectionPhase: ({ commit }) => commit('releasePointSelectionPhase'),
+    releasePointSelectionPhase: ({ commit }) =>
+      commit('releasePointSelectionPhase'),
 
     addPoint(context) {
       const point = {
@@ -28,7 +29,7 @@ export const store =  new Vuex.Store({
     },
     removePoint(context, point) {
       context.commit('removePoint', point)
-    }
+    },
   },
   mutations: {
     movePointSelectionPhase(state) {
@@ -43,7 +44,7 @@ export const store =  new Vuex.Store({
       state.pointCount++
     },
     removePoint(state, point) {
-      state.points = state.points.filter(p => p.n !== point.n)
-    }
+      state.points = state.points.filter((p) => p.n !== point.n)
+    },
   },
 })

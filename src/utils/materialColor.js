@@ -14,7 +14,7 @@ export function getColorAliasByNum(num) {
 }
 
 export function getColorCode(alias) {
-  return (alias in colorMapping) ? colorMapping[alias] : null
+  return alias in colorMapping ? colorMapping[alias] : null
 }
 
 export function getColorCodeByNum(num) {

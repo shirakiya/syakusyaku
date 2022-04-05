@@ -5,31 +5,31 @@
 [![CircleCI](https://circleci.com/gh/shirakiya/syakusyaku.svg?style=svg)](https://circleci.com/gh/shirakiya/syakusyaku)
 
 # syakusyaku (尺々)
+
 You can see the distance on Google Maps with Syakusyaku.  
 https://syakusyaku.shirakiya.com/
 
-
 ## Requirements
+
 - Node.js >= 12
 - Docker / docker-compose
 
-
 ## Environment Variables
-| Key            | default       | description                                                 |
-|----------------|---------------|-------------------------------------------------------------|
-| GOOGLE_API_KEY | ''            | for Google Maps                                             |
 
-
+| Key            | default | description     |
+| -------------- | ------- | --------------- |
+| GOOGLE_API_KEY | ''      | for Google Maps |
 
 ## SetUp
+
 Build docker image.
 
 ```
 $ docker-compose build
 ```
 
-
 ## Run app
+
 This project uses Webpack. In dev, run application with webpack-dev-server.
 
 ```
@@ -37,8 +37,7 @@ This project uses Webpack. In dev, run application with webpack-dev-server.
 $ docker-compose up
 ```
 
-
 ## Deploy
+
 Deploy from CircleCI to Firebase Hosting.  
 It hooks the workflow to push git tags named 'v...'.
-

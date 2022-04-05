@@ -1,11 +1,14 @@
 version: 2.1
+
 orbs:
   node: circleci/node@5.0.2
+
 executors:
   nodejs:
     docker:
       - image: cimg/node:16.14.2
     working_directory: ~/syakusyaku
+
 jobs:
   lint:
     executor: nodejs
@@ -17,6 +20,17 @@ jobs:
       - run:
           name: Check Lint
           command: npm run lint
+
+  prettier:
+    executor: nodejs
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-version: v1
+          pkg-manager: npm
+      - run:
+          name: Check Lint
+          command: npm run prettier:check
 
   build:
     executor: nodejs
@@ -33,7 +47,7 @@ jobs:
       - persist_to_workspace:
           root: public
           paths:
-            - "*"
+            - '*'
 
   deploy-firebase:
     executor: nodejs
@@ -52,10 +66,8 @@ workflows:
   version: 2
   test-and-deploy:
     jobs:
-      - lint:
-          filters:
-            tags:
-              only: /^v.*/
+      - lint
+      - prettier
       - build:
           requires:
             - lint

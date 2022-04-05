@@ -14,7 +14,8 @@
     <v-card-text>
       <v-container>
         <p class="font-weight-bold">
-          「尺々」はGoogle Mapsに好きな距離の円を置くことができるシンプルな無料Webアプリです。家から会社までの距離を測るときなど、使い方は様々です。
+          「尺々」はGoogle
+          Mapsに好きな距離の円を置くことができるシンプルな無料Webアプリです。家から会社までの距離を測るときなど、使い方は様々です。
         </p>
 
         <v-stepper
@@ -22,27 +23,34 @@
           alt-labels
         >
           <v-stepper-header>
-            <v-stepper-step step="1" editable>
+            <v-stepper-step
+              step="1"
+              editable
+            >
               追加ボタン
             </v-stepper-step>
 
             <v-divider />
 
-            <v-stepper-step step="2" editable>
+            <v-stepper-step
+              step="2"
+              editable
+            >
               マップ上でクリック
             </v-stepper-step>
 
             <v-divider />
 
-            <v-stepper-step step="3" editable>
+            <v-stepper-step
+              step="3"
+              editable
+            >
               半径の調整
             </v-stepper-step>
           </v-stepper-header>
 
           <v-stepper-content step="1">
-            <p>
-              まずはじめに「中心地点を追加する」ボタンを選択します。
-            </p>
+            <p>まずはじめに「中心地点を追加する」ボタンを選択します。</p>
 
             <div class="d-flex justify-center pb-2">
               <v-img
@@ -76,14 +84,17 @@
             >
               次へ
             </v-btn>
-            <v-btn text @click="step = 1">
+            <v-btn
+              text
+              @click="step = 1"
+            >
               戻る
             </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="3">
             <p>
-              円の半径をお好きな距離に調整します。単位がメートルであることにご注意ください。<br>
+              円の半径をお好きな距離に調整します。単位がメートルであることにご注意ください。<br />
               また、これまでと同じ操作を行うことで複数の円を描くことができます。
             </p>
             <div class="d-flex justify-center pb-2">
