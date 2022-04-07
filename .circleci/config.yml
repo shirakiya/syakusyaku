@@ -71,6 +71,7 @@ workflows:
       - build:
           requires:
             - lint
+            - prettier
           filters:
             tags:
               only: /^v.*/
