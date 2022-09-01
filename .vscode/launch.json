@@ -9,6 +9,7 @@
       "request": "launch",
       "name": "Start frontend server",
       "cwd": "${workspaceFolder}",
+      "skipFiles": ["<node_internals>/**"],
       "runtimeExecutable": "npm",
       "runtimeArgs": ["start"],
       "env": {
