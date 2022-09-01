@@ -11,7 +11,7 @@ https://syakusyaku.shirakiya.com/
 
 ## Requirements
 
-- Node.js >= 12
+- Node.js >= 16
 - Docker / docker-compose
 
 ## Environment Variables
