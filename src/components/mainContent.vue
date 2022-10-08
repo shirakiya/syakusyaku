@@ -259,10 +259,7 @@ export default {
 }
 </script>
 
-<style
-  lang="sass"
-  scoped
->
+<style lang="sass" scoped>
 // This height is a naive value.
 // The header height and the footer height vary by window width.
 $container-height: calc(100vh - 64px - 48px) // 100vh - header - footer
