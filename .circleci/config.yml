@@ -65,8 +65,14 @@ jobs:
 workflows:
   test-and-deploy:
     jobs:
-      - lint
-      - prettier
+      - lint:
+          filters:
+            tags:
+              only: /^v.*/
+      - prettier:
+          filters:
+            tags:
+              only: /^v.*/
       - build:
           requires:
             - lint
