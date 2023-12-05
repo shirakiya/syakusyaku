@@ -6,7 +6,7 @@ orbs:
 executors:
   nodejs:
     docker:
-      - image: cimg/node:21.2.0
+      - image: cimg/node:21.3.0
     working_directory: ~/syakusyaku
 
 jobs:
