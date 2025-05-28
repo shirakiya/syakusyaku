@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@babel/core": "7.27.1",
+    "@babel/core": "7.27.3",
     "@babel/preset-env": "7.27.2",
     "babel-loader": "10.0.0",
     "clean-webpack-plugin": "4.0.0",
